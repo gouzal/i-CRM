@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Larbi (generated)" id="1588202994386-1">
+        <createTable tableName="purchase">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="date_achat" type="datetime"/>
+            <column name="id_fournisseur" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-2">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="prix_achat" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prix_vente" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="qte" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_vente" type="datetime"/>
+            <column name="id_sous_categorie" type="BIGINT"/>
+            <column name="product" type="BIGINT"/>
+            <column name="id_client" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-3">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-4">
+        <createTable tableName="customer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="adresse" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="forme_juridique" type="VARCHAR(255)"/>
+            <column name="ice" type="VARCHAR(255)"/>
+            <column name="raison_sociale" type="VARCHAR(255)"/>
+            <column name="tel_bureau" type="VARCHAR(255)"/>
+            <column name="tel_portable" type="VARCHAR(255)"/>
+            <column name="id_ville" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-5">
+        <createTable tableName="provider">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="adresse" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="forme_juridique" type="VARCHAR(255)"/>
+            <column name="ice" type="VARCHAR(255)"/>
+            <column name="raison_sociale" type="VARCHAR(255)"/>
+            <column name="tel_bureau" type="VARCHAR(255)"/>
+            <column name="tel_portable" type="VARCHAR(255)"/>
+            <column name="id_ville" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-6">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-7">
+        <createTable tableName="ligne_achat">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="prix" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="qte" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_achat" type="BIGINT"/>
+            <column name="product" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-8">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-9">
+        <createTable tableName="sous_categorie">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="id_categorie" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-10">
+        <createTable tableName="utilisateur">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login" type="VARCHAR(255)"/>
+            <column name="mot_de_passe" type="VARCHAR(255)"/>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-11">
+        <createTable tableName="utilisateur_role">
+            <column name="id_utilisateur" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_role" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-12">
+        <createTable tableName="city">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-13">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="utilisateur"/>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-14">
+        <createIndex indexName="FK2ih0p0kllcvoeuwhum11locfe" tableName="utilisateur_role">
+            <column name="id_role"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-15">
+        <createIndex indexName="FK5eckotboi8vu5tqsw927fp4h8" tableName="purchase">
+            <column name="id_fournisseur"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-16">
+        <createIndex indexName="FKg5xuq4pyf0hgo3df0oct1y0en" tableName="customer">
+            <column name="id_ville"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-17">
+        <createIndex indexName="FKi6j25yr1py1r7oieb5qrsjq48" tableName="product">
+            <column name="id_sous_categorie"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-18">
+        <createIndex indexName="FKjk3fc93uuwx0sp1o784e5wlnd" tableName="ligne_achat">
+            <column name="id_achat"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-19">
+        <createIndex indexName="FKkg40dyyok70i5reda5orpu2m8" tableName="ligne_achat">
+            <column name="product"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-20">
+        <createIndex indexName="FKllnyf8bd4c9web89e7hv7gij3" tableName="product">
+            <column name="product"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-21">
+        <createIndex indexName="FKn1codr7niku3lbi0g41uupwap" tableName="provider">
+            <column name="id_ville"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-22">
+        <createIndex indexName="FKn8wfgk0yklmeeoftn7ylxf87f" tableName="sous_categorie">
+            <column name="id_categorie"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-23">
+        <createIndex indexName="FKo4q7a6fsf8o3yuntisitol92v" tableName="utilisateur_role">
+            <column name="id_utilisateur"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Larbi (generated)" id="1588202994386-24">
+        <createIndex indexName="FKtr4a26xuy9x9v22p8m4mgf2mg" tableName="product">
+            <column name="id_client"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

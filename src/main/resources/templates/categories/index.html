@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main-layout}"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>index</title>
+</head>
+
+<body>
+
+<div layout:fragment="content" th:remove="tag">
+    hello
+</div>
+
+<div layout:fragment="js-section" th:remove="tag">
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+</div>
+
+</body>
+</html>

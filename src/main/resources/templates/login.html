@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main-layout}"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+</div>
+<div layout:fragment="js-section">
+    <script>
+        $(document).ready(function () {
+            //init
+            $('#tagsid').select2();
+
+            $("#publish").on("click", function () {
+
+            });
+        });
+    </script>
+</div>
+
+</body>
+</html>

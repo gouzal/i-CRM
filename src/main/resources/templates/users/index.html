@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main-layout}"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${'List of ' + entityName+'s'}">index</title>
+</head>
+
+<body>
+
+
+<div layout:fragment="content" th:remove="tag">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">Active Users
+                    <div class="btn-actions-pane-right">
+                        <div role="group" class="btn-group-sm btn-group">
+                            <button class="active btn btn-focus">Last Week</button>
+                            <button class="btn btn-focus">All Month</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="main-data-table"
+                           class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th class="text-center">login</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user: ${list}">
+                            <!--/*@thymesVar id="user" type="com.gouzal.icrm.entity.User"*/-->
+                            <td class="text-center text-muted" th:text="${'#'+user.getId()}"></td>
+                            <td>
+                                <div class="widget-content p-0">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left mr-3">
+                                            <div class="widget-content-left">
+                                                <img width="40" class="rounded-circle"
+                                                     th:src="${'/images/avatars/'+user.getAvatar()}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left flex2">
+                                            <div class="widget-heading"
+                                                 th:text="${user.getPrefix()}+'.'+${user.getFirstName()} +' '+${user.getLastName()}">
+                                                John Doe
+                                            </div>
+                                            <div class="widget-subheading opacity-7">
+                                                <!--/*@thymesVar id="role" type="com.gouzal.icrm.entity.Role"*/-->
+                                                <span th:text="${user.getPoste()}">
+
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="widget-content-left flex2">
+                                <!--/*@thymesVar id="role" type="com.gouzal.icrm.entity.Role"*/-->
+                                <span th:class="'badge badge-alternate'"
+                                      th:each="role: ${user.getRoles()}"
+                                      th:text="${role.getName().toLowerCase()}"></span></td>
+                            <td class="text-center" th:text="${user.getLogin()}"></td>
+                            <td class="text-center">
+                                <div class="mb-2 mr-2 badge "
+                                     th:classappend="${user.isActive()} ? 'badge-success' : 'badge-secondary'"
+                                     th:text="${user.isActive()} ? 'active' : 'disable'">Success
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary btn-sm" id="show-modal"
+                                        th:attr="data-element-id=${user.getId()}" data-toggle="modal"
+                                        data-target="#basicModal">Details
+                                </button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-block text-center card-footer">
+                    <div layout:fragment="basic-pagination" th:remove="tag"
+                         th:replace="layouts/fragments/basic-pagination :: setParams(${list},${entityName+'s'})"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="js-section" th:remove="tag">
+    <script>
+        $(document).ready(function () {
+            $("#main-data-table").on("click", "#show-modal", function () {
+                $.getJSON("ajax/users/" + $(this).data("element-id"), function (response) {
+                    let basicModalConetnt = `   <div class="tab-content">
+                    <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+                                <div>
+                                    <img width="40" class="rounded-circle" src="images/avatars/${response.avatar}"> <span
+                                        class="card-title">${response.firstName} ${response.lastName}</span>
+                                </div>
+                                <hr>
+                                <form class="">
+                                    <div class="form-row">
+                                        <div class="col-md-8">
+                                            <div class="position-relative form-group">
+                                                <label for="login" class="">login</label>
+                                                <input
+                                                    name="email" id="login" placeholder=""
+                                                    value="${response.login}"
+                                                    type="email" class="form-control"></div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label  class="">is active</label><br>
+                                                <span class="badge ${response.active ? 'badge-success' : 'badge-secondary'} ">${response.active ? 'Active' : 'Disabled'}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                    $("#basic-modal-body").html(basicModalConetnt);
+                })
+            })
+        });
+    </script>
+</div>
+
+</body>
+
+
+</html>
+
