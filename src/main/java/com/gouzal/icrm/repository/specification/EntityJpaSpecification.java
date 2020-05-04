@@ -10,7 +10,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class EntityJpaSpecification<T> {
-    final Specification specification;
+    final private Specification specification;
 
     public EntityJpaSpecification() {
         this.specification = createSpecification(createEmptySearchCriteria());
