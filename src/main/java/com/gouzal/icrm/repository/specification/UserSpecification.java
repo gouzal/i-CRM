@@ -1,5 +1,6 @@
 package com.gouzal.icrm.repository.specification;
 
+import com.gouzal.icrm.dto.SearchCriteria;
 import com.gouzal.icrm.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.Root;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSpecification implements Specification<User> {
+public abstract class UserSpecification implements Specification<User> {
     @Autowired
     private SearchCriteria searchCriteria;
 

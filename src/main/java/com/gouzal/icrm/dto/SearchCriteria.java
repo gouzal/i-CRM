@@ -1,4 +1,4 @@
-package com.gouzal.icrm.repository.specification;
+package com.gouzal.icrm.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 public class SearchCriteria {
     private String key;
     private String operation;

@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Operation<T> {
-    public List<T> findAll();
 
-    public Optional<T> findById(Long id);
+    List<T> findAll();
 
-    public void save(T instance);
+    Optional<T> findById(Long id);
 
-    public void deleteById(Long id);
+    void save(T instance);
+
+    void deleteById(Long id);
 }
