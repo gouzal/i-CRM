@@ -26,8 +26,8 @@ public class UserController {
 
     @GetMapping("/users")
     public String index(Model model,
-                        @RequestParam(defaultValue = "5", required = false, name = "size") int pageSize,
-                        @RequestParam(defaultValue = "0", required = false, name = "page") int pageNumber) {
+                        @RequestParam(name = "size", defaultValue = "5", required = false) int pageSize,
+                        @RequestParam(name = "page", defaultValue = "0", required = false) int pageNumber) {
         model.addAttribute("entityName", userEntityName);
         model.addAttribute("iconClass", userIconClass);
         model.addAttribute("list", userService.findAll(PageRequest.of((pageNumber > 0) ? (pageNumber - 1) : 0, pageSize)));
