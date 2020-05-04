@@ -10,15 +10,14 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class EntityJpaSpecification<T> {
-    final private Specification specification;
-
-    public EntityJpaSpecification() {
-        this.specification = createSpecification(createEmptySearchCriteria());
-    }
+    private Specification specification;
 
     public Specification convertWithOR(SearchCriteria... criteriaList) {
-        for (SearchCriteria searchCriteria : criteriaList) {
-            this.specification.or(createSpecification(searchCriteria));
+        if (criteriaList.length > 0) {
+            this.specification = createSpecification(criteriaList[0]);
+        }
+        for (int i = 1; i < criteriaList.length; i++) {
+            this.specification.or(createSpecification(criteriaList[i]));
         }
         return specification;
     }

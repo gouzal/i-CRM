@@ -1,9 +1,11 @@
 package com.gouzal.icrm.controller;
 
+import com.gouzal.icrm.dto.SearchCriteria;
 import com.gouzal.icrm.entity.User;
 import com.gouzal.icrm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,12 @@ public class UserController {
                         @RequestParam(name = "page", defaultValue = "0", required = false) int pageNumber) {
         model.addAttribute("entityName", userEntityName);
         model.addAttribute("iconClass", userIconClass);
-        model.addAttribute("list", userService.findAll(PageRequest.of((pageNumber > 0) ? (pageNumber - 1) : 0, pageSize)));
+
+
+       // SearchCriteria searchCriteria=new SearchCriteria("firstName",":","Axel");
+
+        Page<User> users = userService.findAll(PageRequest.of((pageNumber > 0) ? (pageNumber - 1) : 0, pageSize));
+        model.addAttribute("list",users );
         return "users/index";
     }
 
