@@ -29,15 +29,18 @@ public class UserController {
     @GetMapping("/users")
     public String index(Model model,
                         @RequestParam(name = "size", defaultValue = "5", required = false) int pageSize,
-                        @RequestParam(name = "page", defaultValue = "0", required = false) int pageNumber) {
+                        @RequestParam(name = "page", defaultValue = "0", required = false) int pageNumber,
+                        @RequestParam(name = "table-search", defaultValue = "", required = false) String tableSearch,
+                        @RequestParam(name = "table-column", defaultValue = "*", required = false) String tableColumn) {
+
         model.addAttribute("entityName", userEntityName);
         model.addAttribute("iconClass", userIconClass);
 
 
-       // SearchCriteria searchCriteria=new SearchCriteria("firstName",":","Axel");
+        // SearchCriteria searchCriteria=new SearchCriteria("firstName",":","Axel");
 
         Page<User> users = userService.findAll(PageRequest.of((pageNumber > 0) ? (pageNumber - 1) : 0, pageSize));
-        model.addAttribute("list",users );
+        model.addAttribute("list", users);
         return "users/index";
     }
 

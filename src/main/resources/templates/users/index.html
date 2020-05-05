@@ -17,8 +17,8 @@
                 <div class="card-header">Active Users
                     <div class="btn-actions-pane-right">
                         <div role="group" class="btn-group-sm btn-group">
-                            <input  placeholder="search"/>
-                            <button class="active btn btn-focus">Search</button>
+                            <input id="search-keyword" placeholder="search"/>
+                            <button data-url="" id="search-btn" class="active btn btn-focus">Search</button>
                         </div>
                     </div>
                 </div>
@@ -97,10 +97,32 @@
 
 <div layout:fragment="js-section" th:remove="tag">
     <script>
+
+
         $(document).ready(function () {
+
+
+            $("#search-btn").on("click", function () {
+                //let url = $(location).attr('href');
+                let url = window.location.origin + "/users";
+                const searchKeyword = ($.urlParam("search")!=null ? "search=" + $.urlParam("search") : "search=" + $("#search-keyword").val());
+                const column = ($.urlParam("column")!=null ? "column=" + $.urlParam("column") : "&column=" + "*");
+                url += (url.includes('?') ? "&" : "?") +searchKeyword+column ;
+                $(location).attr('href', url);
+            });
+
+            $.urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results == null) {
+                    return null;
+                }
+                return decodeURI(results[1]) || 0;
+            }
+
+
             $("#main-data-table").on("click", "#show-modal", function () {
                 $.getJSON("ajax/users/" + $(this).data("element-id"), function (response) {
-                    let basicModalConetnt = `   <div class="tab-content">
+                    let basicModalContent = `   <div class="tab-content">
                     <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
                         <div class="main-card mb-3 card">
                             <div class="card-body">
@@ -132,10 +154,26 @@
                         </div>
                     </div>
                 </div>`;
-                    $("#basic-modal-body").html(basicModalConetnt);
+                    $("#basic-modal-body").html(basicModalContent);
                 })
             })
         });
+    </script>
+    <script>
+        function changeQueryVariable(keyString, replaceString) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            var replaced = false;
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == keyString) {
+                    vars[i] = pair[0] + "=" + replaceString;
+                    replaced = true;
+                }
+            }
+            if (!replaced) vars.push(keyString + "=" + replaceString);
+            return vars.join("&");
+        }
     </script>
 </div>
 
