@@ -9,21 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Customer {
+//@AllArgsConstructor
+public class Customer extends BusinessTier {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String CompanyName;
-	private String legalType;
-	private String mobileNumber;
-	private String fixNumber;
-	private String email;
-	private String ice;
-	private String address;
-	
-    @ManyToOne
-	private City city;
-	
 }

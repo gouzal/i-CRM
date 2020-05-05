@@ -11,21 +11,7 @@ import lombok.*;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Provider {
+//@AllArgsConstructor
+public class Provider extends BusinessTier{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String CompanyName;
-	private String legalType;
-	private String mobileNumber;
-	private String fixNumber;
-	private String email;
-	private String ice;
-	private String address;
-
-    @ManyToOne
-	private City city;
-	
 }
