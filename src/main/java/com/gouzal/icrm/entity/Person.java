@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +20,5 @@ public abstract class Person {
     private String firstName;
     private String lastName;
     private String avatar;
-    private String poste;
+    private String title;
 }
