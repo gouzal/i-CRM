@@ -20,5 +20,5 @@ public abstract class Person {
     private String firstName;
     private String lastName;
     private String avatar;
-    private String title;
+    private String poste;
 }

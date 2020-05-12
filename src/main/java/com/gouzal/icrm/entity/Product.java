@@ -10,18 +10,21 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="product_type",
+        discriminatorType = DiscriminatorType.STRING)
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String name;
-	private String reference;
-	private float purchasePrice;
-	private float salePrice;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String reference;
+    private float purchasePrice;
+    private float salePrice;
 
-	@ManyToOne
-	private Category category;
+    @ManyToOne
+    private Category category;
     
     /*
     @OneToMany(targetEntity=PurchaseItem.class, mappedBy="article",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
